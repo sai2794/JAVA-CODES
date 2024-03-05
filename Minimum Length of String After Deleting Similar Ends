@@ -1,0 +1,35 @@
+Intuition
+My initial thoughts on solving this problem would be to iterate through the string and identify the longest prefix and suffix that consist of the same character. Then, we can remove these portions from the string and repeat the process until no more such prefixes and suffixes can be found. Finally, we return the length of the remaining string.
+
+Approach
+My approach to solving this problem would involve using two pointers to identify the longest prefix and suffix that consist of the same character. We would iterate through the string and update the pointers accordingly. Once we find such prefix and suffix, we remove them from the string and repeat the process until no more such prefixes and suffixes can be found. Finally, we return the length of the remaining string.
+
+Complexity
+Time complexity:
+The time complexity of my approach is O(n)O(n)O(n), where n is the length of the input string. This is because we only need to traverse the string once to identify the prefixes and suffixes.
+
+Space complexity:
+The space complexity of my approach is O(1)O(1)O(1). We are not using any extra space that grows with the input size; instead, we are performing operations directly on the input string. Therefore, the space complexity is constant.
+
+Code
+public class Solution {
+    public int minimumLength(String s) {
+        int left = 0, right = s.length() - 1;
+        
+        // Find the leftmost and rightmost equal characters
+        while (left < right && s.charAt(left) == s.charAt(right)) {
+            char target = s.charAt(left);
+            // Move the left pointer to the right as long as characters are equal
+            while (left <= right && s.charAt(left) == target) {
+                left++;
+            }
+            // Move the right pointer to the left as long as characters are equal
+            while (left <= right && s.charAt(right) == target) {
+                right--;
+            }
+        }
+        
+        // Calculate the length of the remaining string
+        return right - left + 1;
+    }
+}
